@@ -21,7 +21,9 @@ sudo useradd -m -s /bin/bash seed
 echo "seed:dees" | sudo chpasswd
 
 sudo sed -i 's/^#\?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sudo sed -i 's/^#\?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/ssh_config
 sudo systemctl restart sshd
+sudo systemctl restart ssh
 
 # Allow seed to run sudo commands without password
 sudo cp Files/System/seed_sudoers  /etc/sudoers.d/
