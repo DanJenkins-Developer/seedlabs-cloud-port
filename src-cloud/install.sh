@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# In theory this should help with not being prompted during the window system installation
+export DEBIAN_FRONTEND=noninteractive
+
 #=================================================================
 # Most cloud platforms create a default account in the system.
 # We will not use this account for SEED labs. Instead, we will
@@ -20,20 +23,6 @@ sudo chmod 440 /etc/sudoers.d/seed_sudoers
 
 # Set the USERID shell variable.
 USERID=seed
-
-# Set password for the seed user.
-# Replace 'yourpassword' with the actual password you want to set.
-echo 'seed:13881qwe' | sudo chpasswd
-
-# Edit the SSH server configuration to enable password authentication
-echo "Enabling PasswordAuthentication in SSH configuration..."
-sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-
-# Restart the SSH service to apply the changes
-sudo service ssh restart
-
-
-echo "Password authentication for SSH has been enabled."
 
 #================================================
 echo "Installing various tools ..."
@@ -74,6 +63,9 @@ sudo apt -y install unzip
 sudo apt -y install whois
 sudo apt -y install zip
 sudo apt -y install zsh
+
+# Utilities added by me
+sudo apt-get install -y debconf-utils
 
 # Install vscode 
 sudo snap install --classic code
@@ -125,6 +117,10 @@ echo "Installing Wireshark ..."
 # Install Wireshark
 # Make sure to select 'No' when asked whether non-superuser should be
 #      able to capture packets.
+
+# Preconfigure Wireshark installation options
+echo "wireshark-common wireshark-common/install-setuid boolean false" | sudo debconf-set-selections
+
 sudo apt -y install wireshark
 sudo chgrp $USERID /usr/bin/dumpcap
 sudo chmod 750 /usr/bin/dumpcap
@@ -136,10 +132,18 @@ echo "Installing software for the cloud VM ..."
 
 # Instal a light-weighted window manager.
 # It will ask us to choose a default display manager, chose LightDM. 
-sudo apt -y install xfce4 xfce4-goodies
+
+# Preconfigure LightDM selection for xfce4
+echo "lightdm lightdm/choose_default_manager select lightdm" | sudo debconf-set-selections
+sudo debconf-set-selections <<< "lightdm lightdm/choose_default_manager select lightdm"
+
+
+#sudo apt -y install xfce4 xfce4-goodies
+sudo -E apt-get -qq install -y xfce4 xfce4-goodies
 
 # Install TigerVNC server
-sudo apt -y install tigervnc-standalone-server tigervnc-xorg-extension
+#sudo apt -y install tigervnc-standalone-server tigervnc-xorg-extension
+sudo -E apt-get -qq install -y tigervnc-standalone-server tigervnc-xorg-extension
 
 
 #================================================
@@ -193,5 +197,3 @@ echo "***************************************"
 echo "If you want to be able to SSH into the seed account, you need to set up public keys."
 echo "You can find the instruction in the manual."
 echo "***************************************"
-
-

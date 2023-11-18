@@ -26,53 +26,6 @@ resource "google_compute_instance" "default" {
   }
 
 
-   metadata_startup_script = <<-EOF
-
-    # Step 2.c: Install software and configure the systemd
-    # export DEBIAN_FRONTEND=noninteractive  # Set non-interactive mode
-
-    #!/bin/bash
-	sudo -i
-	#=================================================================
-	# Most cloud platforms create a default account in the system.
-	# We will not use this account for SEED labs. Instead, we will
-	# create a new account called "seed", give it the privilege
-	# to run "sudo" commands. 
-	#=================================================================
-
-	#================================================
-	# Create a user account called "seed" if it does not exist. 
-	# For security, we will not set the password for this account, 
-	#   so nobody can ssh directly into this account. You need to 
-	#   set up public keys to ssh directly into this account.
-	sudo useradd -m -s /bin/bash seed 
-
-	# Allow seed to run sudo commands without password
-	sudo cp Files/System/seed_sudoers  /etc/sudoers.d/
-	sudo chmod 440 /etc/sudoers.d/seed_sudoers
-
-	# Set the USERID shell variable.
-	USERID=seed
-
-	# Set password for the seed user.
-	# Replace 'yourpassword' with the actual password you want to set.
-	echo 'seed:13881qwe' | sudo chpasswd
-
-	# Edit the SSH server configuration to enable password authentication
-	echo "Enabling PasswordAuthentication in SSH configuration..."
-	sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
-
-	# Restart the SSH service to apply the changes
-	sudo service ssh restart
-
-
-	echo "Password authentication for SSH has been enabled."
-
-
-
-    EOF
-
-
   network_interface {
     subnetwork = google_compute_subnetwork.default.id
 
@@ -80,6 +33,28 @@ resource "google_compute_instance" "default" {
       # Include this section to give the VM an external IP address
     }
   }
+
+  metadata = {
+   ssh-keys = "ubuntu:${file("/home/admin_/.ssh/id_rsa.pub")}"  
+}
+
+connection {
+  type        = "ssh"
+  host        = self.network_interface[0].access_config[0].nat_ip
+  user        = "ubuntu"  # or the appropriate username
+  private_key = file("/home/admin_/.ssh/id_rsa")  # path to your private key
+}
+
+provisioner "file" {
+   source= "/home/admin_/tf-tutorial/src-cloud"
+   destination="/tmp/src-cloud"
+}
+provisioner "remote-exec" {
+   inline = [
+   "chmod +x /tmp/src-cloud/install.sh",
+   "sudo /tmp/src-cloud/install.sh"
+]
+}
 }
 
 output "instance_startup_script" {
