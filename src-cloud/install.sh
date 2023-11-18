@@ -17,14 +17,15 @@ export DEBIAN_FRONTEND=noninteractive
 #   set up public keys to ssh directly into this account.
 sudo useradd -m -s /bin/bash seed 
 
-# Set a password for the seed user
-echo "seed:dees" | sudo chpasswd
 
 sudo sed -i 's/^\s*PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sudo systemctl restart sshd
 
-sudo sed -i 's/^#\?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/ssh_config
-sudo systemctl restart ssh
+# sudo sed -i 's/^#\?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/ssh_config
+# sudo systemctl restart ssh
+
+# Set a password for the seed user
+echo "seed:dees" | sudo chpasswd
 
 # Allow seed to run sudo commands without password
 sudo cp Files/System/seed_sudoers  /etc/sudoers.d/
