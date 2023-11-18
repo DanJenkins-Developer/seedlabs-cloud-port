@@ -16,11 +16,11 @@ export DEBIAN_FRONTEND=noninteractive
 #   so nobody can ssh directly into this account. You need to 
 #   set up public keys to ssh directly into this account.
 
-# sudo sed -i 's/^\s*PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-# sudo systemctl restart sshd
+sudo sed -i 's/^\s*PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sudo systemctl restart sshd
 
-# sudo sed -i 's/^#\?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/ssh_config
-# sudo systemctl restart ssh
+sudo sed -i 's/^#\?PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/ssh_config
+sudo systemctl restart ssh
 
 sudo useradd -m -s /bin/bash seed 
 
