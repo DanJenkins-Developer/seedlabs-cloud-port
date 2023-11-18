@@ -30,176 +30,176 @@ sudo chmod 440 /etc/sudoers.d/seed_sudoers
 # Set the USERID shell variable.
 USERID=seed
 
-#================================================
-echo "Installing various tools ..."
+# #================================================
+# echo "Installing various tools ..."
 
-sudo apt update
+# sudo apt update
 
-#------------------------------------------------
-# Networking Tools
+# #------------------------------------------------
+# # Networking Tools
 
-sudo apt -y install telnetd
-sudo apt -y install traceroute
-sudo apt -y install openbsd-inetd
+# sudo apt -y install telnetd
+# sudo apt -y install traceroute
+# sudo apt -y install openbsd-inetd
 
-# net-tools include arp, ifconfig, netstat, route etc.
-sudo apt -y install net-tools
+# # net-tools include arp, ifconfig, netstat, route etc.
+# sudo apt -y install net-tools
 
-# For Firewalls lab
-sudo apt -y install conntrack
+# # For Firewalls lab
+# sudo apt -y install conntrack
 
-# For DNS
-sudo apt -y install resolvconf
+# # For DNS
+# sudo apt -y install resolvconf
 
-# Install browser
-sudo apt -y install firefox
+# # Install browser
+# sudo apt -y install firefox
 
-#------------------------------------------------
-# Utilities
+# #------------------------------------------------
+# # Utilities
 
-sudo apt -y install bless
-sudo apt -y install ent
-sudo apt -y install execstack
-sudo apt -y install gcc-multilib
-sudo apt -y install gdb
-sudo apt -y install ghex
-sudo apt -y install libpcap-dev
-sudo apt -y install nasm
-sudo apt -y install unzip
-sudo apt -y install whois
-sudo apt -y install zip
-sudo apt -y install zsh
+# sudo apt -y install bless
+# sudo apt -y install ent
+# sudo apt -y install execstack
+# sudo apt -y install gcc-multilib
+# sudo apt -y install gdb
+# sudo apt -y install ghex
+# sudo apt -y install libpcap-dev
+# sudo apt -y install nasm
+# sudo apt -y install unzip
+# sudo apt -y install whois
+# sudo apt -y install zip
+# sudo apt -y install zsh
 
-# Utilities added by me
-sudo apt-get install -y debconf-utils
+# # Utilities added by me
+# sudo apt-get install -y debconf-utils
 
-# Install vscode 
-sudo snap install --classic code
+# # Install vscode 
+# sudo snap install --classic code
 
-# sudo apt -y install vim  (already in the system)
-# sudo apt -y install git  (already in the system)
-# sudo apt -y install curl (already in the system)
-# sudo apt -y install tcpdump (already in the system)
+# # sudo apt -y install vim  (already in the system)
+# # sudo apt -y install git  (already in the system)
+# # sudo apt -y install curl (already in the system)
+# # sudo apt -y install tcpdump (already in the system)
 
-#================================================
-# Python3.8 is already in the OS
-echo "Installing Python and modules ..."
+# #================================================
+# # Python3.8 is already in the OS
+# echo "Installing Python and modules ..."
 
-# Install pip3 and Python3 modules 
-sudo apt -y install python3-pip
-sudo pip3 install scapy
-sudo pip3 install pycryptodome
+# # Install pip3 and Python3 modules 
+# sudo apt -y install python3-pip
+# sudo pip3 install scapy
+# sudo pip3 install pycryptodome
 
 
-#================================================
-echo "Installing miscellaneous tools ..."
+# #================================================
+# echo "Installing miscellaneous tools ..."
 
-# Install gdbpeda (gdb plugin)
-git clone https://github.com/longld/peda.git /tmp/gdbpeda
-sudo cp -r /tmp/gdbpeda /opt
-rm -rf /tmp/gdbpeda
+# # Install gdbpeda (gdb plugin)
+# git clone https://github.com/longld/peda.git /tmp/gdbpeda
+# sudo cp -r /tmp/gdbpeda /opt
+# rm -rf /tmp/gdbpeda
 
-#================================================
-echo "Installing docker utilities ..."
+# #================================================
+# echo "Installing docker utilities ..."
   
-# Install docker
-sudo apt -y install docker.io
+# # Install docker
+# sudo apt -y install docker.io
 
-# Start docker and enable it to start after the system reboot:
-sudo systemctl enable --now docker
+# # Start docker and enable it to start after the system reboot:
+# sudo systemctl enable --now docker
 
-# Optionally give any user administrative privileges to docker:
-sudo usermod -aG docker $USERID
+# # Optionally give any user administrative privileges to docker:
+# sudo usermod -aG docker $USERID
 
-# Install docker-compose. Check whether 1.27.4 is the newest version
-sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# # Install docker-compose. Check whether 1.27.4 is the newest version
+# sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
-sudo chmod +x /usr/local/bin/docker-compose
-
-
-#================================================
-echo "Installing Wireshark ..."
-
-# Install Wireshark
-# Make sure to select 'No' when asked whether non-superuser should be
-#      able to capture packets.
-
-# Preconfigure Wireshark installation options
-echo "wireshark-common wireshark-common/install-setuid boolean false" | sudo debconf-set-selections
-
-sudo apt -y install wireshark
-sudo chgrp $USERID /usr/bin/dumpcap
-sudo chmod 750 /usr/bin/dumpcap
-sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
+# sudo chmod +x /usr/local/bin/docker-compose
 
 
-#================================================
-echo "Installing software for the cloud VM ..."
+# #================================================
+# echo "Installing Wireshark ..."
 
-# Instal a light-weighted window manager.
-# It will ask us to choose a default display manager, chose LightDM. 
+# # Install Wireshark
+# # Make sure to select 'No' when asked whether non-superuser should be
+# #      able to capture packets.
 
-# Preconfigure LightDM selection for xfce4
-echo "lightdm lightdm/choose_default_manager select lightdm" | sudo debconf-set-selections
-sudo debconf-set-selections <<< "lightdm lightdm/choose_default_manager select lightdm"
+# # Preconfigure Wireshark installation options
+# echo "wireshark-common wireshark-common/install-setuid boolean false" | sudo debconf-set-selections
 
-
-#sudo apt -y install xfce4 xfce4-goodies
-sudo -E apt-get -qq install -y xfce4 xfce4-goodies
-
-# Install TigerVNC server
-#sudo apt -y install tigervnc-standalone-server tigervnc-xorg-extension
-sudo -E apt-get -qq install -y tigervnc-standalone-server tigervnc-xorg-extension
+# sudo apt -y install wireshark
+# sudo chgrp $USERID /usr/bin/dumpcap
+# sudo chmod 750 /usr/bin/dumpcap
+# sudo setcap cap_net_raw,cap_net_admin+eip /usr/bin/dumpcap
 
 
-#================================================
-echo "Customizatoin ..."
+# #================================================
+# echo "Installing software for the cloud VM ..."
 
-HOMEDIR=/home/$USERID
+# # Instal a light-weighted window manager.
+# # It will ask us to choose a default display manager, chose LightDM. 
 
-# Change the own of this folder (and all its files) to $USERID,
-# because we need to access it from the $USERID account. This 
-# guarantees that the "sudo -u $USERID cp Files/..." command will work.
-sudo chown -R $USERID Files
-
-
-# Install gdbpeda (gdb plugin)
-sudo -u $USERID cp Files/System/seed_gdbinit $HOMEDIR/.gdbinit
-
-# We have defined a few aliases for the SEED labs
-sudo -u $USERID cp Files/System/seed_bash_aliases $HOMEDIR/.bash_aliases
-
-# Customization for Wireshark
-sudo -u $USERID mkdir -p $HOMEDIR/.config/wireshark/
-sudo -u $USERID cp Files/Wireshark/preferences $HOMEDIR/.config/wireshark/preferences
-sudo -u $USERID cp Files/Wireshark/recent $HOMEDIR/.config/wireshark/recent
+# # Preconfigure LightDM selection for xfce4
+# echo "lightdm lightdm/choose_default_manager select lightdm" | sudo debconf-set-selections
+# sudo debconf-set-selections <<< "lightdm lightdm/choose_default_manager select lightdm"
 
 
-# Create launcher icons on the desktop
-sudo -u $USERID mkdir -p $HOMEDIR/Desktop
-sudo -u $USERID cp Files/System/Desktop/*  $HOMEDIR/Desktop
-sudo -u $USERID chmod u+x $HOMEDIR/Desktop/*.desktop
-sudo -u $USERID mkdir -p $HOMEDIR/.local/icons
-sudo -u $USERID cp Files/System/Icons/*  $HOMEDIR/.local/icons
+# #sudo apt -y install xfce4 xfce4-goodies
+# sudo -E apt-get -qq install -y xfce4 xfce4-goodies
 
-# Copy the desktop image files
-sudo cp -f Files/System/Background/* /usr/share/backgrounds/xfce/
-
-# Configure the VNC server 
-sudo -u $USERID mkdir -p $HOMEDIR/.vnc
-sudo -u $USERID cp Files/System/vnc_xstartup $HOMEDIR/.vnc/xstartup
-sudo -u $USERID chmod u+x $HOMEDIR/.vnc/xstartup
-
-#================================================
-echo "Cleaning up ..."
-
-# Clean up the apt cache 
-sudo apt clean
-sudo rm -rf /var/lib/apt/lists/*
+# # Install TigerVNC server
+# #sudo apt -y install tigervnc-standalone-server tigervnc-xorg-extension
+# sudo -E apt-get -qq install -y tigervnc-standalone-server tigervnc-xorg-extension
 
 
-#================================================
-echo "***************************************"
-echo "If you want to be able to SSH into the seed account, you need to set up public keys."
-echo "You can find the instruction in the manual."
-echo "***************************************"
+# #================================================
+# echo "Customizatoin ..."
+
+# HOMEDIR=/home/$USERID
+
+# # Change the own of this folder (and all its files) to $USERID,
+# # because we need to access it from the $USERID account. This 
+# # guarantees that the "sudo -u $USERID cp Files/..." command will work.
+# sudo chown -R $USERID Files
+
+
+# # Install gdbpeda (gdb plugin)
+# sudo -u $USERID cp Files/System/seed_gdbinit $HOMEDIR/.gdbinit
+
+# # We have defined a few aliases for the SEED labs
+# sudo -u $USERID cp Files/System/seed_bash_aliases $HOMEDIR/.bash_aliases
+
+# # Customization for Wireshark
+# sudo -u $USERID mkdir -p $HOMEDIR/.config/wireshark/
+# sudo -u $USERID cp Files/Wireshark/preferences $HOMEDIR/.config/wireshark/preferences
+# sudo -u $USERID cp Files/Wireshark/recent $HOMEDIR/.config/wireshark/recent
+
+
+# # Create launcher icons on the desktop
+# sudo -u $USERID mkdir -p $HOMEDIR/Desktop
+# sudo -u $USERID cp Files/System/Desktop/*  $HOMEDIR/Desktop
+# sudo -u $USERID chmod u+x $HOMEDIR/Desktop/*.desktop
+# sudo -u $USERID mkdir -p $HOMEDIR/.local/icons
+# sudo -u $USERID cp Files/System/Icons/*  $HOMEDIR/.local/icons
+
+# # Copy the desktop image files
+# sudo cp -f Files/System/Background/* /usr/share/backgrounds/xfce/
+
+# # Configure the VNC server 
+# sudo -u $USERID mkdir -p $HOMEDIR/.vnc
+# sudo -u $USERID cp Files/System/vnc_xstartup $HOMEDIR/.vnc/xstartup
+# sudo -u $USERID chmod u+x $HOMEDIR/.vnc/xstartup
+
+# #================================================
+# echo "Cleaning up ..."
+
+# # Clean up the apt cache 
+# sudo apt clean
+# sudo rm -rf /var/lib/apt/lists/*
+
+
+# #================================================
+# echo "***************************************"
+# echo "If you want to be able to SSH into the seed account, you need to set up public keys."
+# echo "You can find the instruction in the manual."
+# echo "***************************************"
