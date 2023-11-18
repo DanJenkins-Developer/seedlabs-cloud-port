@@ -52,6 +52,7 @@ provisioner "file" {
 provisioner "remote-exec" {
    inline = [
    "chmod +x /tmp/src-cloud/install.sh",
+   "cd /tmp/src-cloud",
    "sudo /tmp/src-cloud/install.sh"
 ]
 }
