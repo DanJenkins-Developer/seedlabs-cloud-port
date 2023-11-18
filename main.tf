@@ -25,7 +25,12 @@ resource "google_compute_instance" "default" {
     }
   }
 
-
+    metadata_startup_script = <<EOF
+  #!/bin/bash
+  sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+  sed -i 's/^ChallengeResponseAuthentication no/ChallengeResponseAuthentication yes/' /etc/ssh/sshd_config
+  systemctl restart sshd
+  EOF
   network_interface {
     subnetwork = google_compute_subnetwork.default.id
 
