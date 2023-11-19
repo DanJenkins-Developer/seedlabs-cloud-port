@@ -59,6 +59,6 @@ Log in via SSH to the user `seed` on the VM with password `dees`.
 
 ## Notes
 
-It seems like converting from a GCP to CloudStack terraform config might easy. Just look at this [article](https://www.shapeblue.com/automating-infrastructure-with-cloudstack-and-terraform/) on Automating Infrastructure with CloudStack and Terraform. 
+It seems like converting from a GCP to CloudStack terraform config might be pretty easy. Just look at this [article](https://www.shapeblue.com/automating-infrastructure-with-cloudstack-and-terraform/) on Automating Infrastructure with CloudStack and Terraform. Seems like all the resources we are using in the configs currently have equivilents in cloud stack. 
 
 
