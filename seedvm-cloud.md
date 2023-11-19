@@ -32,19 +32,23 @@ Go to images in Compute Engine and click the create image button. Choose the .vm
 ```
 git clone https://github.com/DanJenkins-Developer/seedlabs-cloud-port.git
 ```
+Change directories into the /create_from_image directory
+```
+cd ~/seedlabs-cloud-port/create_from_image
+```
+At this point, you can run `terraform init` to add the necessary plugins and build the `.terraform directory`.
+```
+terraform init
+```
+You can validate the Terraform code that you've built so far by running `terraform plan`.
+```
+terraform plan
+```
 
-- Most cloud platforms provide a default browser-based SSH client.
-  Google cloud's SSH client even allows you to upload and download files,
-  which is very convenient.
-
-- You can also find many third-party SSH clients. Some clouds may have
-  disabled the password authentication in SSH, so you have to use
-  public keys for the authentication.
-  You need to generate public/private key pairs on your SSH client machine,
-  and save the public key into the `/home/seed/.ssh/authorized_keys` file on
-  the server machine. You can easily find
-  instructions from online resources, so we will not provide one here.
-
+To create the VM, run `terraform apply`
+```
+terraform apply
+```
 
 ## Notes on Cost
 
