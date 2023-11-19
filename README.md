@@ -14,6 +14,8 @@ Steps for creating vm from image:
 
 Steps for creating vm from scratch:
 
+This doesn't quite work yet, for some portion of the setupscript that enables password authentication doesn't work.  
+
 1. Activate Cloud Shell and set current project with "gcloud config set project PROJECT_ID"
 2. git clone https://github.com/DanJenkins-Developer/seedlabs-cloud-port.git into your prefered directory
 3. Run "terraform init" to add the necessary plugins and build the .terraform directory.
