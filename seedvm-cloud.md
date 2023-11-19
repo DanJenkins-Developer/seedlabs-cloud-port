@@ -1,5 +1,9 @@
 # Creating a SEED VM from an Image
 
+This document provides instructions on configuring your GCP cloud environment for 
+SEED Labs. The ultimate goal project is to convert this setup to be used in Apache CloudStack.
+At this point configuration takes place within GCP and the terraform file is ran via 
+
 
 ## Step 1: Download custom SEED labs image
 
