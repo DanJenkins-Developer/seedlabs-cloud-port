@@ -20,7 +20,8 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2004-lts"
+      #image = "ubuntu-os-cloud/ubuntu-2004-lts"
+      image = "seed-labs-ubuntu"
       size  = 20  # 20GB boot disk size
     }
   }
@@ -48,13 +49,13 @@ provisioner "file" {
    source= "/home/admin_/tf-tutorial/src-cloud"
    destination="/tmp/src-cloud"
 }
-provisioner "remote-exec" {
-   inline = [
-   "chmod +x /tmp/src-cloud/install.sh",
-   "cd /tmp/src-cloud",
-   "sudo /tmp/src-cloud/install.sh"
-]
-}
+# provisioner "remote-exec" {
+#    inline = [
+#    "chmod +x /tmp/src-cloud/install.sh",
+#    "cd /tmp/src-cloud",
+#    "sudo /tmp/src-cloud/install.sh"
+# ]
+# }
 }
 
 output "instance_startup_script" {
