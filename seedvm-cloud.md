@@ -14,9 +14,8 @@ Theoretically these two solutions could be combined. First, an admin would run t
 
 First download the custom SEED labs image we created onto your local machine. 
 
+(This is not available right now I have to either enable public access to the bucket I have the image in or download it and put it in a .zip file)
 - [Seed Labs . image](./create_vm_aws.md)
-
-This image was created by following the steps provided by SEED Labs, see their [github](https://github.com/seed-labs/seed-labs/blob/master/manuals/cloud/seedvm-cloud.md.). They only provided the steps to download dependencies and create the user's while we provide the actual image. 
 
 ## Step 2: Upload the .vmdk image to a bucket via the Cloud Storage API
 
@@ -26,15 +25,13 @@ In order to create an image in Compute Engine from a .vmdk file it has to be sto
 
 ## Step 3  Create an image in Compute Engine
 
-Go to images in Compute Engine and click the create image button. Choose the .vmdk file as the source. 
-You will have to select it from the bucket you just uploaded it to. Name this image "seed-labs-ubuntu".
+Go to images in Compute Engine and click the create image button. Choose the .vmdk file as the source. You will have to select it from the bucket you just uploaded it to. Name this image "seed-labs-ubuntu" so that it is the same as the boot disk parmeter in the terraform file.
 
-## Step 4 (Option B: Access the VM Using SSH
+## Step 4 Clone this repository Cloud Shell and run terraform file
 
-To run VNC, you need to have reasonable bandwidth. If your VNC performance
-is bad, you should switch to SSH. You can get by with many of the
-SEED labs using just terminals. There are many ways to SSH into the
-cloud VM:
+```
+git clone https://github.com/DanJenkins-Developer/seedlabs-cloud-port.git
+```
 
 - Most cloud platforms provide a default browser-based SSH client.
   Google cloud's SSH client even allows you to upload and download files,
