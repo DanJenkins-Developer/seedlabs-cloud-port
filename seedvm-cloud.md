@@ -1,8 +1,10 @@
-# Creating SEED lab VMs in GCP via Cloud Shell
+# Automating the creation of SEED lab VMs in GCP via Cloud Shell
 
-This document provides instructions on configuring your GCP cloud environment to run preconfigured SEED lab VMs. Original instructions for creating a SEED lab VM in the Cloud were provided by kevin-w-du on [Github](https://github.com/seed-labs/seed-labs/blob/master/manuals/cloud/seedvm-cloud.md). The terraform file in the \create_form_scratch directory attempts to automate this process. 
+This document provides instructions on configuring your GCP cloud environment to run preconfigured SEED lab VMs. Original instructions for creating a SEED lab VM in the Cloud were provided by kevin-w-du on [Github](https://github.com/seed-labs/seed-labs/blob/master/manuals/cloud/seedvm-cloud.md). 
 
-The ultimate goal project is to convert this setup to be used in Apache CloudStack. At this point configuration takes place within GCP and the terraform file is ran inside the cloud shell.
+The terraform file in the \create_form_scratch directory attempts to automate creating the VM from scratch while the one in \create_from_image automates setting up a Seed Labs VM from an image of an already created VM. Theoretically these two solutions could be combined. First, an admin would run the terraform setup form \create_form_scratch to create the initial Seed Labs VM. Next, they would create an image in GCP from this VM. Finally, they would use this newly created image as the boot disk parameter in the \create_from_image terraform file to create a copy of the Seed Labs VM. 
+
+Our ultimate goal project is to convert this setup to be used in Apache CloudStack. At this point configuration takes place within GCP and the terraform file is ran inside the cloud shell.
 
 
 ## Step 1: Download custom SEED labs image
