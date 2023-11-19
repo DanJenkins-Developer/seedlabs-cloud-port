@@ -49,16 +49,16 @@ To create the VM, run `terraform apply`
 ```
 terraform apply
 ```
+## Step 5 Log in to the new Seed Labs VM
+Log in via SSH to the user `seed` on the VM with password `dees`. 
 
-## Notes on Cost
 
-Unless you have a special deal with cloud company, you will
-be charged for using the cloud VM. Please keep an eye on your bill,
-because sometimes, there are costs that you may
-not be aware of, such as bandwidth cost, storage cost, etc.
-Understanding where your expense is can help you reduce it.
-Moreover, to avoid wasting money, remember to
-suspend your VMs if you are not working on them. Although a
-suspended VM still incurs storage cost (usually very small), it
-does not incur any computing costs. You can easily resume them
-when you are ready to continue your work.
+## Issues
+
+- VNC probably won't work right now. I've noticed that it will work on inital setup of a Seed Labs VM, but if you 1) stop the vm and then start if again or 2) create a Seed Labs VM from the image it won't.
+
+## Notes
+
+It seems like converting from a GCP to CloudStack terraform config might easy. Just look at this [article](https://www.shapeblue.com/automating-infrastructure-with-cloudstack-and-terraform/) on Automating Infrastructure with CloudStack and Terraform. 
+
+
