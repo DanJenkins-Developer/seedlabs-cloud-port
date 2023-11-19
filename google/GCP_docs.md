@@ -61,4 +61,6 @@ Log in via SSH to the user `seed` on the VM with password `dees`.
 
 It seems like converting from a GCP to CloudStack terraform config might be pretty easy. Just look at this [article](https://www.shapeblue.com/automating-infrastructure-with-cloudstack-and-terraform/) on Automating Infrastructure with CloudStack and Terraform. Seems like all the resources we are using in the configs currently have equivilents in cloud stack. 
 
+It will most likely involve creating an [instance](https://docs.cloudstack.apache.org/en/latest/adminguide/templates.html#:~:text=When%20Users%20launch%20Instances%2C%20they,who%20can%20use%20the%20Template.) of the Seed Lab VM manually and then replicating this instance with Terraform for each user who starts a lab. 
+
 
