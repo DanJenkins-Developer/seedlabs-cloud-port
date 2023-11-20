@@ -47,18 +47,6 @@ connection {
   user        = "ubuntu"  # or the appropriate username
   private_key = file("/home/admin_/.ssh/id_rsa")  # path to your private key
 }
-
-provisioner "file" {
-   source= "/home/admin_/tf-tutorial/src-cloud"
-   destination="/tmp/src-cloud"
-}
-# provisioner "remote-exec" {
-#    inline = [
-#    "chmod +x /tmp/src-cloud/install.sh",
-#    "cd /tmp/src-cloud",
-#    "sudo /tmp/src-cloud/install.sh"
-# ]
-# }
 }
 
 output "instance_startup_script" {
