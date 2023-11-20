@@ -13,7 +13,7 @@ resource "google_compute_subnetwork" "default" {
 
 # Create a single Compute Engine instance
 resource "google_compute_instance" "default" {
-  name         = "ubuntu-vm"
+  name         = "seed-labs-ubuntu-vm"
   machine_type = "e2-medium"
   zone         = "us-west1-a"
   tags         = ["ssh"]
